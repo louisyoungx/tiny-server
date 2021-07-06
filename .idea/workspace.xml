@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a636bd5-f3e5-4626-b669-657d587e7882" name="默认更改列表" comment="">
-      <change beforePath="$PROJECT_DIR$/Core/core.py" beforeDir="false" afterPath="$PROJECT_DIR$/Core/core.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/requestHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server/requestHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Settings/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Settings/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runserver.py" beforeDir="false" afterPath="$PROJECT_DIR$/runserver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +63,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1625599088954</updated>
-      <workItem from="1625599100060" duration="1788000" />
+      <workItem from="1625599100060" duration="2229000" />
     </task>
     <servers />
   </component>
@@ -74,22 +71,22 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1398" height="161" key="GridCell.Tab.0.bottom" timestamp="1625601074175">
+    <state width="1398" height="161" key="GridCell.Tab.0.bottom" timestamp="1625601397036">
       <screen x="0" y="25" width="1440" height="803" />
     </state>
-    <state width="1398" height="161" key="GridCell.Tab.0.bottom/0.25.1440.803@0.25.1440.803" timestamp="1625601074175" />
-    <state width="1398" height="161" key="GridCell.Tab.0.center" timestamp="1625601074172">
+    <state width="1398" height="161" key="GridCell.Tab.0.bottom/0.25.1440.803@0.25.1440.803" timestamp="1625601397036" />
+    <state width="1398" height="161" key="GridCell.Tab.0.center" timestamp="1625601397036">
       <screen x="0" y="25" width="1440" height="803" />
     </state>
-    <state width="1398" height="161" key="GridCell.Tab.0.center/0.25.1440.803@0.25.1440.803" timestamp="1625601074172" />
-    <state width="1398" height="161" key="GridCell.Tab.0.left" timestamp="1625601074171">
+    <state width="1398" height="161" key="GridCell.Tab.0.center/0.25.1440.803@0.25.1440.803" timestamp="1625601397036" />
+    <state width="1398" height="161" key="GridCell.Tab.0.left" timestamp="1625601397035">
       <screen x="0" y="25" width="1440" height="803" />
     </state>
-    <state width="1398" height="161" key="GridCell.Tab.0.left/0.25.1440.803@0.25.1440.803" timestamp="1625601074171" />
-    <state width="1398" height="161" key="GridCell.Tab.0.right" timestamp="1625601074174">
+    <state width="1398" height="161" key="GridCell.Tab.0.left/0.25.1440.803@0.25.1440.803" timestamp="1625601397035" />
+    <state width="1398" height="161" key="GridCell.Tab.0.right" timestamp="1625601397036">
       <screen x="0" y="25" width="1440" height="803" />
     </state>
-    <state width="1398" height="161" key="GridCell.Tab.0.right/0.25.1440.803@0.25.1440.803" timestamp="1625601074174" />
+    <state width="1398" height="161" key="GridCell.Tab.0.right/0.25.1440.803@0.25.1440.803" timestamp="1625601397036" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/tiny_server$runserver.coverage" NAME="runserver Coverage Results" MODIFIED="1625601074154" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

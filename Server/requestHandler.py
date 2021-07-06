@@ -1,6 +1,7 @@
 import os, json
 from Logs.logs import log
 from http.server import BaseHTTPRequestHandler
+from Settings.settings import SERVER_LOG
 
 # Document https://docs.python.org/3.9/library/http.server.html
 
@@ -32,7 +33,10 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.file(url)
 
     def log_message(self, format, *args):
-        log.update("Server", format%args)
+        if SERVER_LOG:
+            log.update("Server", format%args)
+        else:
+            pass
 
     def home(self):
 
