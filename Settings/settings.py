@@ -1,0 +1,9 @@
+DEBUG = True
+
+SERVER_HOST = 'louisyoung.work'
+LOCAL_HOST = "0.0.0.0"
+PORT = 12006
+
+QQBotUID = 2782594859
+
+LOG_LENGTH = 100 # 记录100条数据
