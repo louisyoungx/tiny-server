@@ -31,6 +31,9 @@ class RequestHandler(BaseHTTPRequestHandler):
         else:
             self.file(url)
 
+    def log_message(self, format, *args):
+        log.update("Server", format%args)
+
     def home(self):
 
         file_path = self.rootDir + "/index.html"
