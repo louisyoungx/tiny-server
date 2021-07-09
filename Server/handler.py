@@ -32,7 +32,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.file(url)
 
     def log_message(self, format, *args):
-        SERVER_LOGGER = eval(config.settings("Logger", "SERVER_LOGGER"))
+        SERVER_LOGGER = config.settings("Logger", "SERVER_LOGGER")
         if SERVER_LOGGER:
             logger.info(format % args)
         else:

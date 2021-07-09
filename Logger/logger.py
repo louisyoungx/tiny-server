@@ -4,9 +4,9 @@ from Config.settings import config
 
 # 从config中查询所需数据
 filename = config.path() + config.settings("Logger", "FILE_PATH") + config.settings("Logger", "FILE_NAME")
-maxBytes = eval(config.settings("Logger", "MAX_BYTES"))
-backupCount = eval(config.settings("Logger", "AMOUNT"))
-clearUp = eval(config.settings("Logger", "CLEAR_UP"))
+maxBytes = config.settings("Logger", "MAX_BYTES")
+backupCount = config.settings("Logger", "AMOUNT")
+clearUp = config.settings("Logger", "CLEAR_UP")
 
 # 创建一个logger，创建一个列表存放logger数据
 logger = logging.getLogger()

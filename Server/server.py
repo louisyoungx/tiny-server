@@ -5,10 +5,10 @@ from Server.handler import RequestHandler
 from Config.settings import config
 
 def server():
-    DEBUG = eval(config.settings("Debug", "DEBUG"))
+    DEBUG = config.settings("Debug", "DEBUG")
     LOCAL_HOST = config.settings("Server", "LOCAL_HOST")
     SERVER_HOST = config.settings("Server", "SERVER_HOST")
-    PORT = eval(config.settings("Server", "PORT"))
+    PORT = config.settings("Server", "PORT")
     if DEBUG == True:
         name = LOCAL_HOST
     else:
