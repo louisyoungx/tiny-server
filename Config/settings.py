@@ -4,7 +4,7 @@ import configparser
 class Config(object):
     def __init__(self, config_file='config.ini'):
         self.rootPath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self._path = os.path.join(self.rootPath, config_file)
+        self._path = self.rootPath + "/config/" + config_file
         if not os.path.exists(self._path):
             raise FileNotFoundError("No such file: config.ini")
         self._config = configparser.ConfigParser()

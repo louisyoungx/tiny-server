@@ -2,21 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a636bd5-f3e5-4626-b669-657d587e7882" name="默认更改列表" comment="">
-      <change afterPath="$PROJECT_DIR$/Config/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logger/logger.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Logger/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/log_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/TEST/log_example.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/logs.py" beforeDir="false" afterPath="$PROJECT_DIR$/TEST/logs_old.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Message/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Message/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Message/message.py" beforeDir="false" afterPath="$PROJECT_DIR$/Message/message.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scheduler/scheduler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scheduler/scheduler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Scheduler/schedulerTools.py" beforeDir="false" afterPath="$PROJECT_DIR$/Scheduler/tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/http_example.py" beforeDir="false" afterPath="$PROJECT_DIR$/TEST/http_example.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/requestHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server/handler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Core/core.py" beforeDir="false" afterPath="$PROJECT_DIR$/Core/core.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logger/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/Logger/logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server/handler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Settings/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Config/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Settings/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Config/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Static/js/log.js" beforeDir="false" afterPath="$PROJECT_DIR$/Static/js/log.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/runserver.py" beforeDir="false" afterPath="$PROJECT_DIR$/runserver.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +86,7 @@
       <option name="presentableId" value="Default" />
       <updated>1625599088954</updated>
       <workItem from="1625599100060" duration="2229000" />
-      <workItem from="1625849806020" duration="7693000" />
+      <workItem from="1625849806020" duration="12653000" />
     </task>
     <servers />
   </component>

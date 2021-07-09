@@ -18,9 +18,9 @@ def running():
     thread_server.start()
 
 if __name__ == "__main__":
-    DEBUG = config.settings("DEBUG", "DEBUG")
+    DEBUG = eval(config.settings("Debug", "DEBUG"))
     if DEBUG == True:
-        logger.info("===== DEBUG MODE =====")
+        logger.info("\n===== DEBUG MODE =====")
         main()
     else:
         running()

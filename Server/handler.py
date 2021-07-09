@@ -1,5 +1,5 @@
 import os, json, urllib.parse
-from Logger.logger import logger, logger_records
+from Logger.logger import logger
 from http.server import BaseHTTPRequestHandler
 from Config.settings import config
 from Message.message import sendFriendMessage
@@ -32,7 +32,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.file(url)
 
     def log_message(self, format, *args):
-        SERVER_LOGGER = config.settings("Logger", "SERVER_LOGGER")
+        SERVER_LOGGER = eval(config.settings("Logger", "SERVER_LOGGER"))
         if SERVER_LOGGER:
             logger.info(format % args)
         else:
@@ -100,7 +100,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         # ----------------------------------------------------------------
         # 此处写API
         if (url == "/log"):
-            content = str(logger_records)
+            content = logger_records()
         elif (url[:11] == "/changeInfo"):
             changeInfo(request_data)
             content = "200"
@@ -125,6 +125,11 @@ def changeInfo(request_data):
     message = request_data["message"]
     message = urllib.parse.unquote(message)
     sendFriendMessage(message, 1462648167)
+
+def logger_records():
+    file_path = config.path() + config.settings("Logger", "FILE_PATH") + config.settings("Logger", "FILE_NAME")
+    file_page_file = open(file_path, 'r')
+    return str(file_page_file.read())
 
 
 # 返回码
