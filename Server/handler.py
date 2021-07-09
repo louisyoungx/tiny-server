@@ -1,21 +1,9 @@
 import os, json
-from Logs.logs import log
+from Logger.logger import logger, logger_records
 from http.server import BaseHTTPRequestHandler
-from Settings.settings import SERVER_LOG
+from Config.settings import config
 
 # Document https://docs.python.org/3.9/library/http.server.html
-
-# 返回码
-class ErrorCode(object):
-    OK = "HTTP/1.1 200 OK\r\n"
-    NOT_FOUND = "HTTP/1.1 404.html Not Found\r\n"
-
-# Content类型
-class ContentType(object):
-    HTML = 'text/html'
-    CSS = "text/css"
-    JavaScript = "application/javascript"
-    PNG = 'img/png'
 
 class RequestHandler(BaseHTTPRequestHandler):
     '''处理请求并返回页面'''
@@ -24,7 +12,7 @@ class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
         self.rootDir = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/Static"
         url = self.requestline[4:-9]
-        # log.update("Server", url)
+        # logger.info(url)
         if (url == "/"):
             self.home()
         elif ("/api" in url):
@@ -33,8 +21,9 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.file(url)
 
     def log_message(self, format, *args):
-        if SERVER_LOG:
-            log.update("Server", format%args)
+        SERVER_LOGGER = config.settings("Logger", "SERVER_LOGGER")
+        if SERVER_LOGGER:
+            logger.info(format%args)
         else:
             pass
 
@@ -97,7 +86,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         # 此处写API
         
         if (url == "/log"):
-            content = str(log.get_data())
+            content = str(logger_records)
         else:
             content = "No Response"
 
@@ -114,4 +103,17 @@ class RequestHandler(BaseHTTPRequestHandler):
 
     def noFound(self):
         self.file("/404.html")
+
+
+# 返回码
+class ErrorCode(object):
+    OK = "HTTP/1.1 200 OK"
+    NOT_FOUND = "HTTP/1.1 404.html Not Found"
+
+# Content类型
+class ContentType(object):
+    HTML = 'text/html'
+    CSS = "text/css"
+    JavaScript = "application/javascript"
+    PNG = 'img/png'
         
