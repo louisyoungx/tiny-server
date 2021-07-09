@@ -1,5 +1,4 @@
-var host = window.location.href
-var url = host + "api/log";
+var url = window.location.origin + "/api/log";
 var content = "";
 
 const ajax = new Promise(function (resolve, reject) {
@@ -23,6 +22,7 @@ const ajax = new Promise(function (resolve, reject) {
   //     item.id = 'item';
   //     glassElm.appendChild(item);
   // }
+  info.reverse(); // 反向迭代
   info.forEach((value, index, array) => {
     let time = value.substring(0, 21);
     let module = value.substring(21).split(":")[0];
@@ -48,6 +48,22 @@ const ajax = new Promise(function (resolve, reject) {
 
     glassElm.appendChild(glass_item_list);
   })
-})
+});
+
+// var url = window.location.origin + "/api/log";
+// var content = "";
+//
+// const ajax = new Promise(function (resolve, reject) {
+//   axios
+//     .get(url)
+//     .then(function (response) {
+//       content = response.data.data;
+//       resolve(content);
+//     })
+//     .catch(function (error) {
+//       console.log(error);
+//       reject(error);
+//     });
+// })
 
 
