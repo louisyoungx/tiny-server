@@ -1,7 +1,7 @@
 # TinyServer
 
 #### 1. Description
-​		Local Python projects run the basic framework, no need to install third party libraries, built-in pure Python native implementation of single-threaded HTTP server, through the built-in RESTful Web API or web page to view the local log, can be timed to execute code, can be notifications, can define server API to view the running status, Customizable Web templates.
+​		Local Python projects run the basic framework, no need to install third party libraries, built-in pure Python native implementation of multiprocess HTTP server, through the built-in RESTful Web API or web page to view the local log, can be timed to execute code, can be notifications, can define server API to view the running status, Customizable Web templates.
 
 #### 2. Key Feature
 - Provides logging, configuration management for running Python projects on the server
