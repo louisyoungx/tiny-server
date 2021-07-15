@@ -9,6 +9,7 @@ from concurrent.futures import ProcessPoolExecutor
 def running():
     PROCESS_MODEL = config.settings("Server", "PROCESS_MODEL")
     SCHEDULER = config.settings("Scheduler", "START_USING")
+    SERVER = config.settings("Server", "START_USING")
     if SCHEDULER == False:
         thread_main = Thread(target=main)
         thread_main.start()
@@ -18,12 +19,13 @@ def running():
         scheduler.schedule()
         thread_scheduler = Thread(target=scheduler.schedule)
         thread_scheduler.start()
-    if PROCESS_MODEL:
-        work_count = config.settings("Server", "PROCESS_COUNT")
-        server_process(work_count)
-    else:
-        thread_server = Thread(target=server)
-        thread_server.start()
+    if SERVER:
+        if PROCESS_MODEL:
+            work_count = config.settings("Server", "PROCESS_COUNT")
+            server_process(work_count)
+        else:
+            thread_server = Thread(target=server)
+            thread_server.start()
 
 def server_process(work_count=4):
     with ProcessPoolExecutor(work_count) as pool:
