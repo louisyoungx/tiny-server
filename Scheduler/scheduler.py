@@ -5,10 +5,11 @@ from Logger.logger import logger
 
 class Timer(object):
 
-    def __init__(self, task, startTime):
+    def __init__(self, task, startTime, skipWeekend):
         '''初始化'''
         self.task = task
         self.start_time = startTime
+        self.skip_weekend = skipWeekend
 
     def schedule(self):
         '''调度执行上下文'''
@@ -21,7 +22,7 @@ class Timer(object):
 
         logger.info("Daily Task Initialized Successfully")
 
-        if not self.isTodayWorkday():
+        if self.skip_weekend and not self.isTodayWorkday():
             # 今天不是工作日，结束今天的任务
             return False
 

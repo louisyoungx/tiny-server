@@ -15,7 +15,8 @@ def running():
         thread_main.start()
     else: # 调度器开启后main函数将被scheduler调度器代理，开启定时执行main
         startTime = config.settings("Scheduler", "START_TIME")
-        scheduler = Timer(task=main, startTime=startTime)
+        skipWeekend = config.settings("Scheduler", "SKIP_WEEKEND")
+        scheduler = Timer(task=main, startTime=startTime, skipWeekend=skipWeekend)
         scheduler.schedule()
         thread_scheduler = Thread(target=scheduler.schedule)
         thread_scheduler.start()
