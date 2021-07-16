@@ -34,7 +34,7 @@ class Timer(object):
             self.execute()
             return True
 
-def execute(self):
+    def execute(self):
         real_datetime = self.realDate()  # 当前的时间（日期）
         real_mstime = self.dateMSTime(real_datetime)  # 当前的时间（毫秒）
         today_task_datetime = self.todayTaskTime()  # 今天任务时间（日期）
