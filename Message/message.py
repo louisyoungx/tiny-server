@@ -10,10 +10,9 @@ class Message(object):
         self.URL = config.settings("Message", "TARGET_SERVER")
     
     def sendFriendMessage(self, message, userid):
-        
         try:
             path = "sendFriendMessage"
-            self.URL = "http://{}/{}".format(self.URL, path)
+            URL = "http://{}/{}".format(self.URL, path)
     
             body = {
                 "sessionKey": "YourSession",
@@ -22,7 +21,7 @@ class Message(object):
                     {"type": "Plain", "text": message}
                 ]
             }
-            sender = requests.post(self.URL, data=json.dumps(body))
+            sender = requests.post(URL, data=json.dumps(body))
     
             mes = message.replace("\n", " ")
             if len(mes) > 10:
@@ -30,20 +29,19 @@ class Message(object):
             logger.info("Send {}".format(mes))
     
             if self.DEBUG:
-                print(sender.request.self.URL)
+                print(sender.request.URL)
                 sender.raise_for_status()
                 print(sender.text)
-                
-            return True
         except:
             logger.error("Message Send Failed")
             return False
+
     
     
     def sendGroupMessage(self, message, groupid):
         try:
             path = "sendGroupMessage"
-            self.URL = "http://{}/{}".format(self.URL, path)
+            URL = "http://{}/{}".format(self.URL, path)
     
             body = {
                 "sessionKey": "YourSession",
@@ -52,17 +50,17 @@ class Message(object):
                     {"type": "Plain", "text": message}
                 ]
             }
-            sender = requests.post(self.URL, data=json.dumps(body))
+            sender = requests.post(URL, data=json.dumps(body))
             mes = message.replace("\n", " ")
             if len(mes) > 10:
                 mes = mes[:10] + "···"
             logger.info("Send {}".format(mes))
     
             if self.DEBUG:
-                print(sender.request.self.URL)
+                print(sender.request.URL)
                 sender.raise_for_status()
                 print(sender.text)
-                
+
             return True
         except:
             logger.error("Message Send Failed")
