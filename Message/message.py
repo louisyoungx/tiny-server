@@ -72,8 +72,8 @@ message = Message()
 
 # 兼容0.4.6以下版本
 
-def sendFriendMessage(message, userid):
-    message.sendFriendMessage(message, userid)
+def sendFriendMessage(msg, userid):
+    message.sendFriendMessage(msg, userid)
 
-def sendGroupMessage(message, groupid):
-    message.sendGroupMessage(message, groupid)
+def sendGroupMessage(msg, groupid):
+    message.sendGroupMessage(msg, groupid)
