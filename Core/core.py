@@ -1,5 +1,6 @@
-from Message.message import message
+from Storage.storage import storage
+
 def main():
     # 此处填写业务
     print("===== 此处业务处理 =====")
-    message.sendFriendMessage("睡了吗", 1462648167)
+
