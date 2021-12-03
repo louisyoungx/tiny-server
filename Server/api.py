@@ -17,3 +17,10 @@ def serverConfig(request):
             value = appConfig[model][item]
             # DEBUG print(model, item, value, type(value))
     return appConfig
+
+
+def signIn(request):
+    # POST example
+    username = request["username"]
+    password = request["password"]
+    return "success"

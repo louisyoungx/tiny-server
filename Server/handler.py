@@ -9,9 +9,9 @@ from Server.url import urls
 # Document https://docs.python.org/3.9/library/http.server.html
 
 class RequestHandler(BaseHTTPRequestHandler):
-    """处理请求并返回页面"""
+    """handle the request and return pages """
 
-    # 处理一个GET请求
+    # handle a GET request
     def do_GET(self):
         self.rootPath = config.path() + "/Static"
         url = self.requestline[4:-9]
@@ -37,6 +37,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         else:
             self.file(url)
 
+    # handle a POST request
     def do_POST(self):
         LOCAL_HOST = config.settings("Server", "LOCAL_HOST")
         PORT = config.settings("Server", "PORT")
@@ -61,7 +62,6 @@ class RequestHandler(BaseHTTPRequestHandler):
             pass
 
     def home(self):
-
         file_path = self.rootPath + "/index.html"
         home_page_file = open(file_path, 'r', encoding="utf-8")
         content = str(home_page_file.read())
