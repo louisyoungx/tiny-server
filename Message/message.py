@@ -1,6 +1,5 @@
 import json
-import requests
-
+import urllib.request
 from Logger.logger import logger
 from Config.settings import config
 
@@ -10,70 +9,53 @@ class Message(object):
         self.DEBUG = config.settings("Debug", "DEBUG")
         self.URL = config.settings("Message", "TARGET_SERVER")
 
-    def sendFriendMessage(self, message, userid):
+    def sender(self, url, data):
         try:
-            path = "sendFriendMessage"
-            URL = "http://{}/{}".format(self.URL, path)
-
-            body = {
-                "sessionKey": "YourSession",
-                "target": userid,
-                "messageChain": [
-                    {"type": "Plain", "text": message}
-                ]
-            }
-            sender = requests.post(URL, data=json.dumps(body))
-
-            mes = message.replace("\n", " ")
+            str_data = json.dumps(data)
+            byte_data = bytes(str_data, encoding='utf-8')
+            response = urllib.request.urlopen(url, data=byte_data)
+            mes = data["messageChain"][0]["text"].replace("\n", " ")
             if len(mes) > 10:
                 mes = mes[:10] + "···"
-            logger.info("Send {}".format(mes))
-
             if self.DEBUG:
-                print(URL)
-                sender.raise_for_status()
-                print(sender.text)
-        except:
-            logger.error("Message Send Failed")
+                logger.info(f'{self.URL} - {mes} - {response.read().decode("utf-8")}')
+            else:
+                logger.info("Send {}".format(mes))
+            return True
+        except Exception as e:
+            if self.DEBUG:
+                logger.error("Message Send Failed -", e)
+            else:
+                logger.error("Message Send Failed")
             return False
+
+    def sendFriendMessage(self, message, userid):
+
+        path = "sendFriendMessage"
+        url = "http://{}/{}".format(self.URL, path)
+
+        data = {
+            "sessionKey": "YourSession",
+            "target": userid,
+            "messageChain": [
+                {"type": "Plain", "text": message}
+            ]
+        }
+        return self.sender(url, data)
 
     def sendGroupMessage(self, message, groupid):
-        try:
-            path = "sendGroupMessage"
-            URL = "http://{}/{}".format(self.URL, path)
 
-            body = {
-                "sessionKey": "YourSession",
-                "target": groupid,
-                "messageChain": [
-                    {"type": "Plain", "text": message}
-                ]
-            }
-            sender = requests.post(URL, data=json.dumps(body))
-            mes = message.replace("\n", " ")
-            if len(mes) > 10:
-                mes = mes[:10] + "···"
-            logger.info("Send {}".format(mes))
+        path = "sendGroupMessage"
+        url = "http://{}/{}".format(self.URL, path)
 
-            if self.DEBUG:
-                print(URL)
-                sender.raise_for_status()
-                print(sender.text)
-
-            return True
-        except:
-            logger.error("Message Send Failed")
-            return False
+        data = {
+            "sessionKey": "YourSession",
+            "target": groupid,
+            "messageChain": [
+                {"type": "Plain", "text": message}
+            ]
+        }
+        return self.sender(url, data)
 
 
 message = Message()
-
-
-# 兼容0.4.6以下版本
-
-def sendFriendMessage(msg, userid):
-    message.sendFriendMessage(msg, userid)
-
-
-def sendGroupMessage(msg, groupid):
-    message.sendGroupMessage(msg, groupid)

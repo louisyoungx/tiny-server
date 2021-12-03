@@ -1,5 +1,5 @@
 import json
-import requests
+import urllib.request
 
 
 class Message(object):
@@ -7,54 +7,53 @@ class Message(object):
         self.DEBUG = True
         self.URL = "www.louisyoung.site:8088"
 
+    def sender(self, url, data):
+        try:
+            str_data = json.dumps(data)
+            byte_data = bytes(str_data, encoding='utf-8')
+            response = urllib.request.urlopen(url, data=byte_data)
+            mes = data["messageChain"][0]["text"].replace("\n", " ")
+            if len(mes) > 10:
+                mes = mes[:10] + "···"
+            if self.DEBUG:
+                print(f'{self.URL} - {mes} - {response.read().decode("utf-8")}')
+            else:
+                print("Send {}".format(mes))
+            return True
+        except Exception as e:
+            if self.DEBUG:
+                print("Message Send Failed -", e)
+            else:
+                print("Message Send Failed")
+            return False
+
     def sendFriendMessage(self, message, userid):
 
         path = "sendFriendMessage"
-        URL = "http://{}/{}".format(self.URL, path)
+        url = "http://{}/{}".format(self.URL, path)
 
-        body = {
+        data = {
             "sessionKey": "YourSession",
             "target": userid,
             "messageChain": [
                 {"type": "Plain", "text": message}
             ]
         }
-        sender = requests.post(URL, data=json.dumps(body))
-
-        mes = message.replace("\n", " ")
-        if len(mes) > 10:
-            mes = mes[:10] + "···"
-        print("Send {}".format(mes))
-
-        if self.DEBUG:
-            print(sender.request.url)
-            sender.raise_for_status()
-            print(sender.text)
+        return self.sender(url, data)
 
     def sendGroupMessage(self, message, groupid):
 
         path = "sendGroupMessage"
-        URL = "http://{}/{}".format(self.URL, path)
+        url = "http://{}/{}".format(self.URL, path)
 
-        body = {
+        data = {
             "sessionKey": "YourSession",
             "target": groupid,
             "messageChain": [
                 {"type": "Plain", "text": message}
             ]
         }
-        sender = requests.post(URL, data=json.dumps(body))
-        mes = message.replace("\n", " ")
-        if len(mes) > 10:
-            mes = mes[:10] + "···"
-        print("Send {}".format(mes))
-
-        if self.DEBUG:
-            print(sender.request.URL)
-            sender.raise_for_status()
-            print(sender.text)
-
-        return True
+        return self.sender(url, data)
 
 
 message = Message()
