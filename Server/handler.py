@@ -1,22 +1,22 @@
-import os, json
-import time
+import os, json, urllib, time
 
 from Logger.logger import logger
 from http.server import BaseHTTPRequestHandler
 from Config.settings import config
-
-# Document https://docs.python.org/3.9/library/http.server.html
 from Server.url import urls
 
 
+# Document https://docs.python.org/3.9/library/http.server.html
+
 class RequestHandler(BaseHTTPRequestHandler):
-    '''处理请求并返回页面'''
+    """处理请求并返回页面"""
 
     # 处理一个GET请求
     def do_GET(self):
         self.rootPath = config.path() + "/Static"
         url = self.requestline[4:-9]
-        request_data = {} # 存放GET请求数据
+        # print(url)
+        request_data = {}  # 存放GET请求数据
         try:
             if url.find('?') != -1:
                 req = url.split('?', 1)[1]
@@ -25,10 +25,29 @@ class RequestHandler(BaseHTTPRequestHandler):
                 for i in parameters:
                     key, val = i.split('=', 1)
                     request_data[key] = val
+            # request_data['body'] = self.rfile.read()
         except:
             logger.error("URL Format Error")
         if (url == "/"):
             self.home()
+        elif (url == ""):
+            self.noFound()
+        elif ("/api" in url):
+            self.api(url[4:], request_data)
+        else:
+            self.file(url)
+
+    def do_POST(self):
+        LOCAL_HOST = config.settings("Server", "LOCAL_HOST")
+        PORT = config.settings("Server", "PORT")
+        hostLen = len(f'/{LOCAL_HOST}:{PORT}') + 5
+        self.rootPath = config.path() + "/Static"
+        url = self.requestline[hostLen:-9]
+        request_data = json.loads(self.rfile.read(int(self.headers['content-length'])).decode())
+        if (url == "/"):
+            self.home()
+        elif (url == ""):
+            self.noFound()
         elif ("/api" in url):
             self.api(url[4:], request_data)
         else:
@@ -44,7 +63,7 @@ class RequestHandler(BaseHTTPRequestHandler):
     def home(self):
 
         file_path = self.rootPath + "/index.html"
-        home_page_file = open(file_path, 'r')
+        home_page_file = open(file_path, 'r', encoding="utf-8")
         content = str(home_page_file.read())
 
         self.send_response(200)
@@ -92,8 +111,13 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(file_page_file.read())
             return
-
-        file_page_file = open(file_path, 'r')
+        elif file_name[-5:] == ".woff":  # 二进制文件
+            self.send_header("Content-Type", "img/ico")
+            file_page_file = open(file_path, 'rb')
+            self.end_headers()
+            self.wfile.write(file_page_file.read())
+            return
+        file_page_file = open(file_path, 'r', encoding="utf-8")
         content = str(file_page_file.read())
         self.send_header("Content-Length", str(len(content)))
         self.end_headers()
@@ -103,7 +127,6 @@ class RequestHandler(BaseHTTPRequestHandler):
         # ----------------------------------------------------------------
         # 此处写API
         content = urls(url, request_data)
-
         # ----------------------------------------------------------------
         localtime = time.localtime(time.time())
         date = \
