@@ -9,6 +9,7 @@ filename = config.path() + config.settings("Logger", "FILE_PATH") + config.setti
 maxBytes = config.settings("Logger", "MAX_BYTES")
 backupCount = config.settings("Logger", "AMOUNT")
 clearUp = config.settings("Logger", "CLEAR_UP")
+colorful = config.settings("Logger", "COLORFUL")
 
 # create a logger，create a list to save logger data
 logger = logging.getLogger()
@@ -41,9 +42,12 @@ def logger_init():
 
     # set logger output style
     # fmt = logging.Formatter('%(asctime)s - %(process)d-%(threadName)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s')
-    fmt = '[%(asctime)s] (%(module)s.%(funcName)s): <%(levelname)s> %(message)s'
+    if colorful:
+        colorFmt = "\033[34m[%(asctime)s]\033[0m \033[36m(%(module)s.%(funcName)s):\033[0m \033[33m<%(levelname)s>\033[0m \033[32m%(message)s\033[0m"
+    else:
+        fmt = '[%(asctime)s] (%(module)s.%(funcName)s): <%(levelname)s> %(message)s'
     datefmt = "%Y-%m-%d %H:%M:%S"
-    formatter = logging.Formatter(fmt=fmt, datefmt=datefmt)
+    formatter = logging.Formatter(fmt=colorFmt, datefmt=datefmt)
 
     # define a console_handler for console output
     console_handler = logging.StreamHandler()
