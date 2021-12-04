@@ -19,25 +19,25 @@ class Progress(object):
 
     def update(self):
         self.count += 1
-        self.progress = int(self.count*self.mutiple)
-        self.percent = self.progress*int(100/self.lens)
+        self.progress = int(self.count * self.mutiple)
+        self.percent = self.progress * int(100 / self.lens)
         percentChar = str(self.percent) + "%"
-        doneSign = self.progress*self.left_sign
-        dontSign = (self.lens-self.progress)*self.right_sign
+        doneSign = self.progress * self.left_sign
+        dontSign = (self.lens - self.progress) * self.right_sign
         leftTime = self.getLeftTime()
         print("\r{}: {:<4} |{}{}| [{}/{}]({})".format(
             self.name, percentChar, doneSign, dontSign, self.count, self.total, leftTime), end="", flush=True)
 
     def done(self):
         print("\r{}: {:<4} |{}{}| [{}/{}]({})".format(
-            self.name, '100%', self.lens*self.left_sign, '', self.count, self.total, '00:00:00'), flush=True)
+            self.name, '100%', self.lens * self.left_sign, '', self.count, self.total, '00:00:00'), flush=True)
 
     def getNowTime(self):
         return int(time.time() - self.startTime)
 
     def getLeftTime(self):
         nowTime = self.getNowTime()
-        leftTimeSecs = int(nowTime/(self.percent/100)) - nowTime if self.percent > 0 else 0
+        leftTimeSecs = int(nowTime / (self.percent / 100)) - nowTime if self.percent > 0 else 0
         leftTime = str(datetime.timedelta(seconds=leftTimeSecs))
         leftTime = leftTime if len(leftTime) > 7 else '0' + leftTime
         return leftTime if leftTimeSecs > 0 else '00:00:00'
