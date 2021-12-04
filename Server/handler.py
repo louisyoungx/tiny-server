@@ -39,8 +39,8 @@ class RequestHandler(BaseHTTPRequestHandler):
 
     # handle a POST request
     def do_POST(self):
-        LOCAL_HOST = config.settings("Server", "LOCAL_HOST")
-        PORT = config.settings("Server", "PORT")
+        LOCAL_HOST = config.Server.LOCAL_HOST
+        PORT = config.Server.PORT
         hostLen = len(f'/{LOCAL_HOST}:{PORT}') + 5
         self.rootPath = config.path() + "/Static"
         url = self.requestline[hostLen:-9]
@@ -55,7 +55,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.file(url)
 
     def log_message(self, format, *args):
-        SERVER_LOGGER = config.settings("Logger", "SERVER_LOGGER")
+        SERVER_LOGGER = config.Logger.SERVER_LOGGER
         if SERVER_LOGGER:
             logger.info(format % args)
         else:

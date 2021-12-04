@@ -27,7 +27,7 @@ class Config(object):
 
             for item in modules:
                 print(item.upper())
-                menus[module][item.upper()] = eval(modules[item])
+                menus[module][item.upper()] = modules[item]
                 # DEBUG print(modules, item, value, type(value))
         print(menus)
         return menus
@@ -45,9 +45,7 @@ class Target(object):
             else:
                 exec(f'self.{key} = target[key]')
 
-    def path(self):
-        return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 _config_ = Config()
 config = Target(_config_.menu())
+print(config.Information.AUTHOR)

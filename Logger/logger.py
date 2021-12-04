@@ -4,12 +4,12 @@ import logging.handlers
 from Config.settings import config
 
 # search settings from config
-path = config.path() + config.settings("Logger", "FILE_PATH")
-filename = config.path() + config.settings("Logger", "FILE_PATH") + config.settings("Logger", "FILE_NAME")
-maxBytes = config.settings("Logger", "MAX_BYTES")
-backupCount = config.settings("Logger", "AMOUNT")
-clearUp = config.settings("Logger", "CLEAR_UP")
-colorful = config.settings("Logger", "COLORFUL")
+path = config.path() + config.Logger.FILE_PATH
+filename = config.path() + config.Logger.FILE_PATH + config.Logger.FILE_NAME
+maxBytes = config.Logger.MAX_BYTES
+backupCount = config.Logger.AMOUNT
+clearUp = config.Logger.CLEAR_UP
+colorful = config.Logger.COLORFUL
 
 # create a logger，create a list to save logger data
 logger = logging.getLogger()
