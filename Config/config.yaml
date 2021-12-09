@@ -5,10 +5,10 @@ Information:
   time: 2021-07-27
 
 Debug: # 调试设置（用于测试Core中代码）
-  open: true # 开启Debug后无视Scheduler只会执行Core.core.main函数中代码
+  open: false # 开启Debug后无视Scheduler只会执行Core.core.main函数中代码
 
 Server: # 服务器设置（用于提供静态文件和api）
-  open: false # 是否启用服务器
+  open: true # 是否启用服务器
   name: Turbon-Server # 服务器名
   version: 1.0.0-alpha # 服务器版本
   port: 12000 # 运行端口号
@@ -37,7 +37,7 @@ Depend: # 依赖管理模块（用于动态引入依赖库）
   path: /
 
 Scheduler: # 调度器设置（用于定时执行）
-  open: true # 是否开启定时执行
+  open: false # 是否开启定时执行
   skip_weekend: true # 周末不执行任务
   time: # 任务执行时间
     - "18:00:00"
