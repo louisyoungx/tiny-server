@@ -99,6 +99,6 @@ python3 runserver
 ```
 
 > Windows via
-> ``python
+> ```python
 > py runserver # or python runserver
 > ```
