@@ -1,103 +1,104 @@
-# TinyServer
+# Turbon
 
-#### 1. Description
-​		Local Python projects run the basic framework, no need to install third party libraries, built-in pure Python native implementation of multiprocess HTTP server, through the built-in RESTful Web API or web page to view the local log, can be timed to execute code, can be notifications, can define server API to view the running status, Customizable Web templates.
+**Turbon** native Python project powerful framework , 
+no need to install third-party libraries
+built-in pure Python native implementation of multi-process http server , 
+built-in restful web api and web pages to view local logs , custom web templates ,
+can be timed to execute code , can dynamically load dependency packages ,
+can be message notification ,
+can define the server api to view the running state , 
+can be persistent storage , there is a perfect logging and configuration system .
 
-#### 2. Key Feature
-- Provides logging, configuration management for running Python projects on the server
-- Web page view log
-- RESTful APIs provide an interface to project information
+## Main Functions
+- Configuration module
+  - Configuration via yaml file
+  - Configuration data can be retrieved via `config.Module.item`.
+- Logging module
+  - Detailed configuration of log size, number of files, etc.
+  - Detailed output information such as time, function, log type, etc.
+  - Command line color output
+  - Control of server logging switches
+  - Built-in progress bar can be invoked
+- Timed execution module
+  - By configuring the switch module
+  - Periodic execution of core code based on start and end times
+  - Automatic skipping of weekends
+  - Multiple execution times can be configured
+- Message notification module
+  - Configurable switch module
+  - Sending emails
+  - Sending QQ messages with `mirai` framework
+- Server module
+  - Built-in static file server
+  - Customizable API and url
+  - API support `GET` and `POST` methods
+  - Built-in API to query the program logs and configuration
+- State persistence module
+  - Responsive object persistence
+  - Real-time storage of data that needs to be persisted
+  - One-click call module
+- Dependency management module
+  - Dynamic loading of dependency packages
+  - Automatic download of missing dependency packages
 
-- Periodically execute the module, executing /Core/main.py on a regular basis based on the start and end time
-- Message notification module, send email or cooperate with Mirai framework to send QQ messages
-- Server API
-- Program information and system status can be queried through the built-in API
-- Customizable simple API
-- Custom web templates
+## Module Functions
 
-#### 3. Basic Modules
+- `Config`
+  - `config.yaml` - configuration information
+  - `config` - read and initialize data in config.ini
+  - `direct` - dictionary to object, direct access to configuration properties via point
+- `Core`
+  - `core` - entry point for program execution
+- `Depend`
+  - `load_depend` - importing dependencies
+  - `import_lib` - dynamic loading of dependencies
+- `Logger`
+  - `Log_Files` - store log files
+  - `logger` - logging module
+  - `progress` - progress bar module
+- `Message`
+  - `message` - messaging interface for sending messages through QQ bots and mailboxes
+- `Scheduler`
+  - `scheduler` - Batch execution task module
+  - `task` - single-task timing module
+- `Server`
+  - `api` - custom api
+  - `handler` - contains the main HTTP request handling
+  - `router` - api routing functions
+  - `server` - used to configure and start server threads
+  - `url` - used for routing configuration
+- `Static`
+  - Static file storage directory
+- `Storage`
+  - `storage` - persistent data storage
+  - `reactive` - implements data responsive
+- `TEST`
+  - Some test files
+- `runserver`
+  - `Turbon` startup portal
 
-- Core
-- main. py - Entry to program execution
-- Config
-  - config.ini - Fill in the basic configuration information
-  - settings.py - Read and initialize data in config.ini
-- Logger
-- logger - Outputs log messages to the console, log file, and Server module
-- Message
-- message - Message passing interface, can send messages through QQ robot and mailbox
-- Scheduler
-  - Scheduler - Scheduled execution of the /Core/main.py module. Once opened and set in config.ini, the /Core/main.py module is scheduled to be executed
-- Server
-- Handler - Contains the main HTTP request handling and API
-- server - Used to configure and start the server thread
-- Static
-- Web page view log
-- RESTful APIs provide an interface to project information
+## Installation Tutorial
 
-#### 4. Operation Environment
-
-- [Python 3](https://www.python.org/)
-
-#### 5. Installation Tutorial
-
-1. ```shell
-   git clone https://gitee.com/louisyoung1/tiny-server.git
-   ```
-
-2. ```sh
-   cd tiny-server
-   ```
-
-
-#### 6. Usage
-
-1. Change the code in /Core/main.py to the code you want to run
-
-2. Edit the configuration items in /Config/config.ini file according to the comment requirements
-
-3. Make sure you are in /tiny-server and enter
-
-   ```sh
-   python3 runserver
-   ```
-
-#### 7. Directory Structure
-
+Pull the repository locally
 ```shell
-.
-├── Config
-│   ├── config.ini
-│   └── settings.py
-├── Core
-│   └── core.py
-├── Logger
-│   ├── Log_Files
-│   │   └── TinyServer.log
-│   └── logger.py
-├── Message
-│   └── message.py
-├── Scheduler
-│   ├── scheduler.py
-│   └── tools.py
-├── Server
-│   ├── handler.py
-│   └── server.py
-├── Static
-│   ├── 404.html
-│   ├── change.html
-│   ├── css
-│   ├── favicon.ico
-│   ├── images
-│   ├── index.html
-│   ├── js
-│   └── log.html
-└── runserver.py
+git clone https://github.com/louisyoungx/turbon.git
 ```
 
-#### 8. Contribution
+Go to the project directory
+```shell
+cd turbon
+```
 
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+Modify the configuration - `/Config/config.yaml`
+
+Modify the code in the main function - ``/Core/core.py``
+
+Run `Turbon` with the following command
+```shell
+python3 runserver
+```
+
+> Windows via
+> ``python
+> py runserver # or python runserver
+> ```
