@@ -4,17 +4,17 @@ import time
 from http.server import BaseHTTPRequestHandler
 from Config import config
 from Logger import logger
-from Server.url import urls
-
+from Server.router import router
 
 # Document https://docs.python.org/3.9/library/http.server.html
 
+
 class RequestHandler(BaseHTTPRequestHandler):
     """handle the request and return pages """
+    rootPath = config.path() + "/Static"
 
     # handle a GET request
     def do_GET(self):
-        self.rootPath = config.path() + "/Static"
         url = self.requestline[4:-9]
         # print(url)
         request_data = {}  # 存放GET请求数据
@@ -26,14 +26,13 @@ class RequestHandler(BaseHTTPRequestHandler):
                 for i in parameters:
                     key, val = i.split('=', 1)
                     request_data[key] = val
-            # request_data['body'] = self.rfile.read()
-        except:
+        except Exception as e:
             logger.error("URL Format Error")
-        if (url == "/"):
+        if url == "/":
             self.home()
-        elif (url == ""):
+        elif url == "":
             self.noFound()
-        elif ("/api" in url):
+        elif "/api" in url:
             self.api(url[4:], request_data)
         else:
             self.file(url)
@@ -43,14 +42,13 @@ class RequestHandler(BaseHTTPRequestHandler):
         LOCAL_HOST = config.Server.LOCAL_HOST
         PORT = config.Server.PORT
         hostLen = len(f'/{LOCAL_HOST}:{PORT}') + 5
-        self.rootPath = config.path() + "/Static"
         url = self.requestline[hostLen:-9]
         request_data = json.loads(self.rfile.read(int(self.headers['content-length'])).decode())
-        if (url == "/"):
+        if url == "/":
             self.home()
-        elif (url == ""):
+        elif url == "":
             self.noFound()
-        elif ("/api" in url):
+        elif "/api" in url:
             self.api(url[4:], request_data)
         else:
             self.file(url)
@@ -125,10 +123,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.wfile.write(content.encode())
 
     def api(self, url, request_data):
-        # ----------------------------------------------------------------
-        # 此处写API
-        content = urls(url, request_data)
-        # ----------------------------------------------------------------
+        content = router(url, request_data)  # 此处进入路由
         localtime = time.localtime(time.time())
         date = \
             localtime.tm_year.__str__() + '-' + \
@@ -137,10 +132,8 @@ class RequestHandler(BaseHTTPRequestHandler):
             localtime.tm_hour.__str__() + ':' + \
             localtime.tm_min.__str__() + ':' + \
             localtime.tm_sec.__str__()
-        jsondict = {}
-        jsondict["data"] = content
-        jsondict["time"] = date
-        res = json.dumps(jsondict)
+        jsonDict = {"data": content, "time": date}
+        res = json.dumps(jsonDict)
         self.send_response(200)
         self.send_header("Content-Type", "text/html")
         self.send_header("Content-Length", str(len(res)))
