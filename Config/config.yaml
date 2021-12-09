@@ -5,7 +5,7 @@ Information:
   time: 2021-07-27
 
 Debug: # 调试设置（用于测试Core中代码）
-  open: false # 开启Debug后无视Scheduler只会执行Core.core.main函数中代码
+  open: true # 开启Debug后无视Scheduler只会执行Core.core.main函数中代码
 
 Server: # 服务器设置（用于提供静态文件和api）
   open: false # 是否启用服务器
@@ -31,6 +31,11 @@ Storage: # 本地存储设置（用于状态持久化存储）
   name: state.json # 存储文件名
   path: /Storage/ # 存储地址
 
+Depend: # 依赖管理模块（用于动态引入依赖库）
+  open: true
+  file: requirements.txt
+  path: /
+
 Scheduler: # 调度器设置（用于定时执行）
   open: true # 是否开启定时执行
   skip_weekend: true # 周末不执行任务
@@ -40,7 +45,7 @@ Scheduler: # 调度器设置（用于定时执行）
     - "20:00:00"
 
 Message: # 消息发送设置（用于通知）
-  open: true # 是否开启消息通知，开启后会自动发送到设置好的Mirai QQ消息服务器
+  open: false # 是否开启消息通知，开启后会自动发送到设置好的Mirai QQ消息服务器
   target_server: www.louisyoung.site:8088 # 通知服务器，当前使用Mirai服务
 
 

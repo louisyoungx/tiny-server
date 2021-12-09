@@ -8,8 +8,12 @@ class Message(object):
     def __init__(self):
         self.DEBUG = config.Debug.open
         self.URL = config.Message.target_server
+        self.OPEN = config.Message.open
 
     def sender(self, url, data):
+        if not self.OPEN:
+            logger.warn("Message Closed")
+            return
         try:
             str_data = json.dumps(data)
             byte_data = bytes(str_data, encoding='utf-8')
@@ -29,7 +33,7 @@ class Message(object):
                 logger.error("Message Send Failed")
             return False
 
-    def sendFriendMessage(self, message, userid):
+    def user(self, message, userid):
 
         path = "sendFriendMessage"
         url = "http://{}/{}".format(self.URL, path)
@@ -43,7 +47,7 @@ class Message(object):
         }
         return self.sender(url, data)
 
-    def sendGroupMessage(self, message, groupid):
+    def group(self, message, groupid):
 
         path = "sendGroupMessage"
         url = "http://{}/{}".format(self.URL, path)
