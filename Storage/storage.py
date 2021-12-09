@@ -8,8 +8,8 @@ from Storage import Reactive
 class Storage(object):
     def __init__(self):
         self.data = Reactive({}, self.save)
-        self.path = config.path() + config.Storage.FILE_PATH
-        self.file = self.path + config.Storage.FILE_NAME
+        self.path = config.path + config.Storage.path
+        self.file = self.path + config.Storage.name
         self.initialize()
 
     def initialize(self):

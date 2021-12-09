@@ -5,12 +5,12 @@ from Config import config
 
 
 def server():
-    NAME = config.Server.SERVER_NAME
-    VERSION = config.Server.SERVER_VERSION
-    DEBUG = config.Debug.DEBUG
-    LOCAL_HOST = config.Server.LOCAL_HOST
-    SERVER_HOST = config.Server.SERVER_HOST
-    PORT = config.Server.PORT
+    NAME = config.Server.name
+    VERSION = config.Server.version
+    DEBUG = config.Debug.open
+    LOCAL_HOST = config.Server.local_host
+    SERVER_HOST = config.Server.server_host
+    PORT = config.Server.port
     if DEBUG:
         name = LOCAL_HOST
     else:

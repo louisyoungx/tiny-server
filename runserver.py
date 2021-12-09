@@ -1,28 +1,26 @@
 from concurrent.futures import ProcessPoolExecutor
 from Core import core
 from Logger import logger
-from Scheduler import Timer
+from Scheduler import Scheduler
 from Config import config
 from Server import server
 from threading import Thread
 
 
 def running():
-    PROCESS_MODEL = config.Server.PROCESS_MODEL
-    SCHEDULER = config.Scheduler.START_USING
-    SERVER = config.Server.START_USING
+    PROCESS_MODE = config.Server.process_mode
+    SCHEDULER = config.Scheduler.open
+    SERVER = config.Server.open
     if not SCHEDULER:
         thread_core = Thread(target=core)
         thread_core.start()
     else:  # 调度器开启后core函数将被scheduler调度器代理，开启定时执行core
-        startTime = config.Scheduler.START_TIME
-        skipWeekend = config.Scheduler.SKIP_WEEKEND
-        scheduler = Timer(task=core, startTime=startTime, skipWeekend=skipWeekend)
-        thread_scheduler = Thread(target=scheduler.schedule)
-        thread_scheduler.start()
+        startTime = config.Scheduler.time
+        skipWeekend = config.Scheduler.skip_weekend
+        scheduler = Scheduler(task=core, startTime=startTime, skipWeekend=skipWeekend)
     if SERVER:
-        if PROCESS_MODEL:
-            work_count = config.Server.PROCESS_COUNT
+        if PROCESS_MODE:
+            work_count = config.Server.process_count
             server_process(work_count)
         else:
             thread_server = Thread(target=server)
@@ -36,7 +34,7 @@ def server_process(work_count=4):
 
 
 if __name__ == "__main__":
-    DEBUG = config.Debug.DEBUG
+    DEBUG = config.Debug.open
     if DEBUG:
         logger.info("\n===== DEBUG MODE =====")
         core()

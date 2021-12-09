@@ -1,4 +1,4 @@
-from Config import configInside, config
+from Config import config
 
 
 def serverLog(request):
@@ -8,7 +8,7 @@ def serverLog(request):
 
 
 def serverConfig(request):
-    return configInside.menu()
+    return config.raw
 
 
 def signIn(request):

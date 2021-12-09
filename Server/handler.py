@@ -11,7 +11,7 @@ from Server.router import router
 
 class RequestHandler(BaseHTTPRequestHandler):
     """handle the request and return pages """
-    rootPath = config.path() + "/Static"
+    rootPath = config.path + config.Server.static_path
 
     # handle a GET request
     def do_GET(self):
@@ -39,8 +39,8 @@ class RequestHandler(BaseHTTPRequestHandler):
 
     # handle a POST request
     def do_POST(self):
-        LOCAL_HOST = config.Server.LOCAL_HOST
-        PORT = config.Server.PORT
+        LOCAL_HOST = config.Server.local_host
+        PORT = config.Server.port
         hostLen = len(f'/{LOCAL_HOST}:{PORT}') + 5
         url = self.requestline[hostLen:-9]
         request_data = json.loads(self.rfile.read(int(self.headers['content-length'])).decode())
@@ -54,7 +54,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.file(url)
 
     def log_message(self, format, *args):
-        SERVER_LOGGER = config.Logger.SERVER_LOGGER
+        SERVER_LOGGER = config.Logger.server_logger
         if SERVER_LOGGER:
             logger.info(format % args)
         else:

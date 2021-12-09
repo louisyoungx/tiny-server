@@ -6,8 +6,8 @@ from Config import config
 
 class Message(object):
     def __init__(self):
-        self.DEBUG = config.Debug.DEBUG
-        self.URL = config.Message.TARGET_SERVER
+        self.DEBUG = config.Debug.open
+        self.URL = config.Message.target_server
 
     def sender(self, url, data):
         try:

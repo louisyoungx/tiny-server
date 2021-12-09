@@ -4,12 +4,12 @@ import logging.handlers
 from Config import config
 
 # search settings from config
-path = config.path() + config.Logger.FILE_PATH
-filename = config.path() + config.Logger.FILE_PATH + config.Logger.FILE_NAME
-maxBytes = config.Logger.MAX_BYTES
-backupCount = config.Logger.AMOUNT
-clearUp = config.Logger.CLEAR_UP
-colorful = config.Logger.COLORFUL
+path = config.path + config.Logger.file_path
+loggerFile = config.path + config.Logger.file_path + config.Logger.file_name
+maxBytes = config.Logger.max_bytes
+backupCount = config.Logger.count
+clearUp = config.Logger.clear_up
+colorful = config.Logger.colorful
 
 # create a logger，create a list to save logger data
 logger = logging.getLogger()
@@ -25,7 +25,7 @@ class CustomFilter(logging.Filter):
 def clearUpLogFile():
     if not os.path.exists(path):
         os.mkdir(path)
-    with open(filename, "w") as file:
+    with open(loggerFile, "w") as file:
         file.seek(0)
         file.truncate()  # clear file
 
@@ -54,7 +54,7 @@ def logger_init():
 
     # define a console_handler for console output
     file_handler = logging.handlers.RotatingFileHandler(
-        filename, maxBytes=maxBytes, backupCount=backupCount, encoding="utf-8")
+        loggerFile, maxBytes=maxBytes, backupCount=backupCount, encoding="utf-8")
 
     # add formatter for handler
     console_handler.setFormatter(formatter)
