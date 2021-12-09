@@ -1,8 +1,8 @@
 import os
 import json
-from Config.settings import config
-from Logger.logger import logger
-from Storage.reactive import Reactive
+from Config import config
+from Logger import logger
+from Storage import Reactive
 
 
 class Storage(object):
@@ -42,4 +42,4 @@ class Storage(object):
             storage.write(data)
 
 
-storage = Storage()
+

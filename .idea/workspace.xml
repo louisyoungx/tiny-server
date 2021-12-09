@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4a636bd5-f3e5-4626-b669-657d587e7882" name="默认更改列表" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logger/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/Logger/logger.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/api.py" beforeDir="false" afterPath="$PROJECT_DIR$/Server/api.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +190,7 @@
       <workItem from="1626463865398" duration="226000" />
       <workItem from="1627319747770" duration="2357000" />
       <workItem from="1627387604944" duration="169000" />
-      <workItem from="1638551365416" duration="29145000" />
+      <workItem from="1638551365416" duration="30774000" />
     </task>
     <servers />
   </component>
@@ -213,7 +210,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/tiny_server$config.coverage" NAME="config Coverage Results" MODIFIED="1638583209740" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TEST" />
+    <SUITE FILE_PATH="coverage/tiny_server$config.coverage" NAME="config Coverage Results" MODIFIED="1638584302240" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TEST" />
     <SUITE FILE_PATH="coverage/tiny_server$runserver.coverage" NAME="runserver Coverage Results" MODIFIED="1627320264138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/tiny_server$request.coverage" NAME="request Coverage Results" MODIFIED="1638552738663" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TEST" />
     <SUITE FILE_PATH="coverage/tiny_server$progress_bar.coverage" NAME="progress_bar Coverage Results" MODIFIED="1638576010710" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TEST" />

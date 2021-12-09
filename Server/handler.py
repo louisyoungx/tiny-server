@@ -1,8 +1,9 @@
-import os, json, urllib, time
-
-from Logger.logger import logger
+import json
+import os
+import time
 from http.server import BaseHTTPRequestHandler
-from Config.settings import config
+from Config import config
+from Logger import logger
 from Server.url import urls
 
 

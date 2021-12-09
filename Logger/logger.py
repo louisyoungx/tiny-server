@@ -1,7 +1,7 @@
 import os
 import logging
 import logging.handlers
-from Config.settings import config
+from Config import config
 
 # search settings from config
 path = config.path() + config.Logger.FILE_PATH

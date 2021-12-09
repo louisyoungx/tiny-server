@@ -1,4 +1,4 @@
-from Logger.logger import logger
+from Logger import logger
 
 
 class Reactive(dict):

@@ -1,7 +1,7 @@
 import json
 import urllib.request
-from Logger.logger import logger
-from Config.settings import config
+from Logger import logger
+from Config import config
 
 
 class Message(object):
@@ -56,6 +56,3 @@ class Message(object):
             ]
         }
         return self.sender(url, data)
-
-
-message = Message()

@@ -15,11 +15,13 @@ class Progress(object):
         self.count = 0
         self.total = total
         self.name = name
-        self.mutiple = self.lens / self.total
+        self.multiple = self.lens / self.total
+        self.progress = 0
+        self.percent = 0
 
     def update(self):
         self.count += 1
-        self.progress = int(self.count * self.mutiple)
+        self.progress = int(self.count * self.multiple)
         self.percent = self.progress * int(100 / self.lens)
         percentChar = str(self.percent) + "%"
         doneSign = self.progress * self.left_sign

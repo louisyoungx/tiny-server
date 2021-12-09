@@ -1,8 +1,7 @@
-from Storage.storage import storage
-from Config.settings import config
-from Message.message import message
-from Logger.logger import logger
-from Logger.progress import progress
+from Storage import storage
+from Config import config
+from Message import message
+from Logger import logger, progress
 
 
 def main():
