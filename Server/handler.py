@@ -39,7 +39,14 @@ class RequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         """Serve a GET request."""
-        fd = self.send_head()
+        fd = self.handle_get()
+        if fd:
+            shutil.copyfileobj(fd, self.wfile)
+            fd.close()
+
+    def do_POST(self):
+        """Serve a POST request."""
+        fd = self.handle_post()
         if fd:
             shutil.copyfileobj(fd, self.wfile)
             fd.close()
@@ -50,34 +57,6 @@ class RequestHandler(BaseHTTPRequestHandler):
         if fd:
             fd.close()
 
-    def do_POST(self):
-        """Serve a POST request."""
-        r, info = self.deal_post_data()
-        print(r, info, "by: ", self.client_address)
-        f = BytesIO()
-        f.write(b'<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">')
-        f.write(b"<html>\n<title>Upload Result Page</title>\n")
-        f.write(b"<body>\n<h2>Upload Result Page</h2>\n")
-        f.write(b"<hr>\n")
-        if r:
-            f.write(b"<strong>Success:</strong>")
-        else:
-            f.write(b"<strong>Failed:</strong>")
-        f.write(info.encode('utf-8'))
-        f.write(b"<br><a href=\"%s\">back</a>" % self.headers['referer'].encode('utf-8'))
-        f.write(b"<hr><small>Powered By: freelamb, check new version at ")
-        f.write(b"<a href=\"https://github.com/freelamb/simple_http_server\">")
-        f.write(b"here</a>.</small></body>\n</html>\n")
-        length = f.tell()
-        f.seek(0)
-        self.send_response(200)
-        self.send_header("Content-type", "text/html;charset=utf-8")
-        self.send_header("Content-Length", str(length))
-        self.end_headers()
-        if f:
-            shutil.copyfileobj(f, self.wfile)
-            f.close()
-
     def log_message(self, format, *args):
         server_logger = config.Logger.server_logger
         if server_logger:
@@ -85,66 +64,12 @@ class RequestHandler(BaseHTTPRequestHandler):
         else:
             pass
 
-    def deal_post_data(self):
-        boundary = self.headers["Content-Type"].split("=")[1].encode('utf-8')
-        remain_bytes = int(self.headers['content-length'])
-        line = self.rfile.readline()
-        remain_bytes -= len(line)
-        if boundary not in line:
-            return False, "Content NOT begin with boundary"
-        line = self.rfile.readline()
-        remain_bytes -= len(line)
-        fn = re.findall(r'Content-Disposition.*name="file"; filename="(.*)"', line.decode('utf-8'))
-        if not fn:
-            return False, "Can't find out file name..."
-        path = translate_path(self.path)
-        fn = os.path.join(path, fn[0])
-        while os.path.exists(fn):
-            fn += "_"
-        line = self.rfile.readline()
-        remain_bytes -= len(line)
-        line = self.rfile.readline()
-        remain_bytes -= len(line)
-        try:
-            out = open(fn, 'wb')
-        except IOError:
-            return False, "Can't create file to write, do you have permission to write?"
-
-        pre_line = self.rfile.readline()
-        remain_bytes -= len(pre_line)
-        while remain_bytes > 0:
-            line = self.rfile.readline()
-            remain_bytes -= len(line)
-            if boundary in line:
-                pre_line = pre_line[0:-1]
-                if pre_line.endswith(b'\r'):
-                    pre_line = pre_line[0:-1]
-                out.write(pre_line)
-                out.close()
-                return True, "File '%s' upload success!" % fn
-            else:
-                out.write(pre_line)
-                pre_line = line
-        return False, "Unexpect Ends of data."
-
-    def send_head(self):
-        """Handle with URL"""
-        if self.is_api():
-            return self.api()
-        else:
+    def handle_get(self):
+        """Handle with GET"""
+        if not self.is_api():
             return self.static()
-
-    def is_api(self):
-        """Check if the request is a api request"""
-        if self.path.startswith('/api'):
-            return True
-        else:
-            return False
-
-    def api(self):
-        """Common api for Get and POST"""
-        url = self.requestline[4:-9]
-        request_data = {}  # 存放GET请求数据
+        url = self.path[4:]
+        request_data = {}
         try:
             if url.find('?') != -1:
                 req = url.split('?', 1)[1]
@@ -155,7 +80,25 @@ class RequestHandler(BaseHTTPRequestHandler):
                     request_data[key] = val
         except Exception as e:
             logger.error("URL Format Error")
-        url = url[4:]
+        return self.api(url, request_data)
+
+    def is_api(self):
+        """Check if the request is a api request"""
+        if self.path.startswith('/api'):
+            return True
+        else:
+            return False
+
+    def handle_post(self):
+        """Handle with POST"""
+        if not self.is_api():
+            return self.static()
+        url = self.path[4:]
+        request_data = json.loads(self.rfile.read(int(self.headers['content-length'])).decode())
+        return self.api(url, request_data)
+
+    def api(self, url, request_data):
+        """Common api for GET and POST"""
         content = router(url, request_data)  # 此处进入路由
         localtime = time.localtime(time.time())
         date = \
@@ -232,9 +175,6 @@ class RequestHandler(BaseHTTPRequestHandler):
         f.write(b"<html>\n<title>Directory listing for %s</title>\n" % display_path.encode('utf-8'))
         f.write(b"<body>\n<h2>Directory listing for %s</h2>\n" % display_path.encode('utf-8'))
         f.write(b"<hr>\n")
-        f.write(b"<form ENCTYPE=\"multipart/form-data\" method=\"post\">")
-        f.write(b"<input name=\"file\" type=\"file\"/>")
-        f.write(b"<input type=\"submit\" value=\"upload\"/></form>\n")
         f.write(b"<hr>\n<ul>\n")
         for name in list_dir:
             fullname = os.path.join(path, name)
