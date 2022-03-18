@@ -1,6 +1,6 @@
 Information:
   project: Turbon
-  version: 1.0.0-alpha
+  version: 1.0.0-beta
   author: Louis·Young
   time: 2021-07-27
 
@@ -10,7 +10,7 @@ Debug: # 调试设置（用于测试Core中代码）
 Server: # 服务器设置（用于提供静态文件和api）
   open: true # 是否启用服务器
   name: Turbon-Server # 服务器名
-  version: 1.0.0-alpha # 服务器版本
+  version: 1.0.0-beta # 服务器版本
   port: 12000 # 运行端口号
   local_host: 0.0.0.0 # 用于启动项目的局域网IP
   server_host: localhost # 填写服务器域名
