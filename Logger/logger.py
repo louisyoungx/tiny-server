@@ -42,12 +42,14 @@ def logger_init():
 
     # set logger output style
     # fmt = logging.Formatter('%(asctime)s - %(process)d-%(threadName)s - %(pathname)s[line:%(lineno)d] - %(levelname)s: %(message)s')
+    fmt = '[%(asctime)s] (%(module)s.%(funcName)s): <%(levelname)s> %(message)s'
     if colorful:
         colorFmt = "\033[34m[%(asctime)s]\033[0m \033[36m(%(module)s.%(funcName)s):\033[0m \033[33m<%(levelname)s>\033[0m \033[32m%(message)s\033[0m"
     else:
-        fmt = '[%(asctime)s] (%(module)s.%(funcName)s): <%(levelname)s> %(message)s'
+        colorFmt = fmt
     datefmt = "%Y-%m-%d %H:%M:%S"
-    formatter = logging.Formatter(fmt=colorFmt, datefmt=datefmt)
+    console_formatter = logging.Formatter(fmt=colorFmt, datefmt=datefmt)
+    file_formatter = logging.Formatter(fmt=fmt, datefmt=datefmt)
 
     # define a console_handler for console output
     console_handler = logging.StreamHandler()
@@ -57,8 +59,8 @@ def logger_init():
         loggerFile, maxBytes=maxBytes, backupCount=backupCount, encoding="utf-8")
 
     # add formatter for handler
-    console_handler.setFormatter(formatter)
-    file_handler.setFormatter(formatter)
+    console_handler.setFormatter(console_formatter)
+    file_handler.setFormatter(file_formatter)
 
     #  add initialized handler object to logger object
     logger.addHandler(console_handler)
