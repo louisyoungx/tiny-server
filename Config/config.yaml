@@ -46,6 +46,6 @@ Scheduler: # 调度器设置（用于定时执行）
 
 Message: # 消息发送设置（用于通知）
   open: false # 是否开启消息通知，开启后会自动发送到设置好的Mirai QQ消息服务器
-  target_server: www.louisyoung.site:8088 # 通知服务器，当前使用Mirai服务
+  target_server: home.rocke.top:8088 # 通知服务器，当前使用Mirai服务
 
 
