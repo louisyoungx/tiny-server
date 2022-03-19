@@ -1,3 +1,4 @@
+import Depend
 from concurrent.futures import ProcessPoolExecutor
 from Core import core
 from Logger import logger
@@ -34,9 +35,6 @@ def server_process(work_count=4):
 
 
 if __name__ == "__main__":
-    DEPEND = config.Depend.open
-    if DEPEND:
-        import Depend
     DEBUG = config.Debug.open
     if DEBUG:
         logger.info("\n===== DEBUG MODE =====")
