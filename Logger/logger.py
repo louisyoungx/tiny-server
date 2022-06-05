@@ -63,8 +63,10 @@ def logger_init():
     file_handler.setFormatter(file_formatter)
 
     #  add initialized handler object to logger object
-    logger.addHandler(console_handler)
-    logger.addHandler(file_handler)
+    if config.Logger.open_console:
+        logger.addHandler(console_handler)
+    if config.Logger.open_file:
+        logger.addHandler(file_handler)
 
 
 logger_init()
