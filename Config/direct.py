@@ -9,7 +9,7 @@ class Direct(object):
             if type(target[key]) == list:
                 for item in target[key]:
                     nList = []
-                    if type(item) == dict:
+                    if type(item) == dict or type(item) == list:
                         dItem = Direct(item)
                         nList.append(dItem)
                     else:

@@ -16,7 +16,7 @@ class Config(object):
 
     def __init__(self):
         self.path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        self.file = self.path + '/TEST/config.yaml'
+        self.file = self.path + '/Test/config.yaml'
         self.data = self.read()
         self.data['path'] = self.path
         self.direct = Direct(self.data)

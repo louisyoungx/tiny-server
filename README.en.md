@@ -72,7 +72,7 @@ can be persistent storage , there is a perfect logging and configuration system 
 - `Storage`
   - `storage` - persistent data storage
   - `reactive` - implements data responsive
-- `TEST`
+- `Test`
   - Some test files
 - `runserver`
   - `Turbon` startup portal

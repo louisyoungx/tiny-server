@@ -69,7 +69,7 @@
 - `Storage`
   - `storage` - 数据持久化存储
   - `reactive` - 实现数据响应式
-- `TEST`
+- `Test`
   - 一些测试文件
 - `runserver`
   - `Turbon`启动入口

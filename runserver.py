@@ -16,9 +16,9 @@ def running():
         thread_core = Thread(target=core)
         thread_core.start()
     else:  # 调度器开启后core函数将被scheduler调度器代理，开启定时执行core
-        startTime = config.Scheduler.time
-        skipWeekend = config.Scheduler.skip_weekend
-        scheduler = Scheduler(task=core, startTime=startTime, skipWeekend=skipWeekend)
+        start_time = config.Scheduler.time
+        skip_weekend = config.Scheduler.skip_weekend
+        scheduler = Scheduler(task=core, start_time=start_time, skip_weekend=skip_weekend)
     if SERVER:
         if PROCESS_MODE:
             work_count = config.Server.process_count
